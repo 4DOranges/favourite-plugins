@@ -1,6 +1,6 @@
 # Favourite Plugins
 A personal annoyance of mine is that I have all my plugins, WIP & finished, cluttering the Plugin Hub list.
-So the idea behind this one is simple: Allow devs to favourite plugins and show only those in the list.
+So the idea behind this one is simple: Allow people to favourite plugins and show only those in the list.
 
 ## Enabling the plugin
 1. Put the fav-plugins folder in your plugin development folder (\Jagex\Runescape-Beta\\).
