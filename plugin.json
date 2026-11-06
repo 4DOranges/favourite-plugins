@@ -1,9 +1,0 @@
-{
-  "name": "Favourite Plugins",
-  "version": "1.0.0",
-  "contactEmailAddress": "plugins@4doranges.dev",
-  "hasSettingsIcon": false,
-  "hasRibbonIcon": false,
-  "requiredDependencies": {},
-  "optionalDependencies": {}
-}
