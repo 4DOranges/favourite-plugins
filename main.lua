@@ -4,6 +4,11 @@ local originalPositions, pluginRows, modifiedComps = {}, {}, {}
 local favIcon
 local lastSortLayer
 
+local favIconEmptyHollow = id.Sprite.MENAPHOS_ICON_FACTION_FAVORITE_33PX_2
+local favIconFull = id.Sprite.MENAPHOS_ICON_FACTION_FAVORITE_33PX_3
+local favIconSelected = id.Sprite.MENAPHOS_ICON_FACTION_FAVORITE_33PX_4
+local favIconEmpty = id.Sprite.MENAPHOS_ICON_FACTION_FAVORITE_33PX_5
+
 -- Move plugins up the list or restore their original position
 function updateFavFilter()
     local visibleIndex = 0
@@ -51,18 +56,18 @@ function checkPluginScreen()
 	lastSortLayer = sortLayer
 
 	favIcon = ui.Sprite.new(sortLayer)
-	favIcon.sprite = showFav and 31190 or 31192
+	favIcon.sprite = showFav and favIconFull or favIconEmpty
 	favIcon:SetSize(30, 30)
 	favIcon:SetPos(sortLayer.width - 45, 0)
 	favIcon:Subscribe(ui.Hook.ONMOUSEOVER, function(self, x, y)
-		self.sprite = 31191
+		self.sprite = favIconSelected
 	end)
 	favIcon:Subscribe(ui.Hook.ONMOUSELEAVE, function(self, x, y)
-		self.sprite = showFav and 31190 or 31192
+		self.sprite = showFav and favIconFull or favIconEmpty
 	end)
 	favIcon:Subscribe(ui.Hook.ONCLICK, function(self, x, y)
 		showFav = not showFav
-		self.sprite = showFav and 31190 or 31192
+		self.sprite = showFav and favIconFull or favIconEmpty
 		updateFavFilter()
 	end)
 
@@ -90,25 +95,25 @@ function checkPluginScreen()
 				})
 
 				local favActionBtn = ui.Sprite.new(component)
-				favActionBtn.sprite = favPlugins[pluginName] and 31190 or 31189
+				favActionBtn.sprite = favPlugins[pluginName] and favIconFull or favIconEmptyHollow
 				favActionBtn:SetSize(20, 20)
 				favActionBtn:SetPos(childComp.x, 2)
 				favActionBtn:MoveToFront()
 				favActionBtn:Subscribe(ui.Hook.ONCLICK, function(self, x, y)
 					if favPlugins[pluginName] then
 						favPlugins[pluginName] = nil
-						self.sprite = 31189
+						self.sprite = favIconEmptyHollow
 					else
 						favPlugins[pluginName] = true
-						self.sprite = 31190
+						self.sprite = favIconFull
 					end
 					updateFavFilter()
 				end)
 				favActionBtn:Subscribe(ui.Hook.ONMOUSEOVER, function(self, x, y)
-					self.sprite = 31191
+					self.sprite = favIconSelected
 				end)
 				favActionBtn:Subscribe(ui.Hook.ONMOUSELEAVE, function(self, x, y)
-					self.sprite = favPlugins[pluginName] and 31190 or 31189
+					self.sprite = favPlugins[pluginName] and favIconFull or favIconEmptyHollow
 				end)
 
 				 -- Move the plugin name so there's space for the favActionBtn
